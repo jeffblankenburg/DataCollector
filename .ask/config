@@ -1,0 +1,33 @@
+{
+  "deploy_settings": {
+    "default": {
+      "skill_id": "amzn1.ask.skill.34328598-cd68-416f-ab3c-6e8de41c9c53",
+      "was_cloned": false,
+      "merge": {},
+      "resources": {
+        "manifest": {
+          "eTag": "202d82b04b2b1e3a82a14672005fdf7b"
+        },
+        "interactionModel": {
+          "en-US": {
+            "eTag": "80c6a2066291da6375fa9f5d4e0e2dc6"
+          }
+        },
+        "lambda": [
+          {
+            "alexaUsage": [
+              "custom/default"
+            ],
+            "arn": "arn:aws:lambda:us-east-1:679180307287:function:DataCollector",
+            "awsRegion": "us-east-1",
+            "codeUri": "lambda/custom",
+            "functionName": "DataCollector",
+            "handler": "index.handler",
+            "revisionId": "83fc44ba-aff3-4ecd-abab-8565e7d9f3e6",
+            "runtime": "nodejs12.x"
+          }
+        ]
+      }
+    }
+  }
+}

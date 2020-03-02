@@ -1,0 +1,118 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "data collector",
+            "intents": [
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "DataIntent",
+                    "slots": [
+                        {
+                            "name": "quantity",
+                            "type": "AMAZON.NUMBER"
+                        },
+                        {
+                            "name": "units",
+                            "type": "Units"
+                        },
+                        {
+                            "name": "datatype",
+                            "type": "Datatype"
+                        }
+                    ],
+                    "samples": [
+                        "{quantity} {units}",
+                        "my {datatype} is {quantity}",
+                        "the {datatype} is {quantity} {units}",
+                        "{quantity}"
+                    ]
+                },
+                {
+                    "name": "DataTypeIntent",
+                    "slots": [
+                        {
+                            "name": "datatypequery",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "I want to track {datatypequery}",
+                        "I want to track my {datatypequery}",
+                        "track my {datatypequery}",
+                        "track {datatypequery}"
+                    ]
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.FallbackIntent",
+                    "samples": []
+                }
+            ],
+            "types": [
+                {
+                    "name": "Datatype",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "weight"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Units",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "calories"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "ounces"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "pounds"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "kilograms",
+                                "synonyms": [
+                                    "kilos",
+                                    "kay gees"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "miles"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "kilometers"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}
