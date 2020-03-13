@@ -10,7 +10,7 @@
         },
         "interactionModel": {
           "en-US": {
-            "eTag": "80c6a2066291da6375fa9f5d4e0e2dc6"
+            "eTag": "af0fcb5cf874d15935f5b7fc9a515743"
           }
         },
         "lambda": [
@@ -23,7 +23,7 @@
             "codeUri": "lambda/custom",
             "functionName": "DataCollector",
             "handler": "index.handler",
-            "revisionId": "83fc44ba-aff3-4ecd-abab-8565e7d9f3e6",
+            "revisionId": "34ad1f93-78f8-41b2-ba81-d8246a21f30f",
             "runtime": "nodejs12.x"
           }
         ]

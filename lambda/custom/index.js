@@ -33,6 +33,7 @@ const DataIntentHandler = {
         var unitsSpoken = getSpokenWords(handlerInput, "units");
         var quantitySpoken = getSpokenWords(handlerInput, "quantity");
         var dataTypeSpoken = getSpokenWords(handlerInput, "datatype");
+        //TODO: WHAT IF THEY SAY A DATATYPE THAT DOESN'T EXIST?  CAN WE GRAB IT?
 
         const speakOutput = "Jeff, you just gave me data.";
 
@@ -51,13 +52,20 @@ const DataTypeIntentHandler = {
     async handle(handlerInput) {
         const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
         var dataTypeSpoken = getSpokenWords(handlerInput, "datatypequery");
+        //TODO: WHAT IF THEY ASK TO TRACK SOMETHING THEY ALREADY HAVE?
 
         var airtable = await new Airtable({apiKey: process.env.airtable_key}).base(process.env.airtable_base_data);
-        await airtable("UserDatatype").create({"User": [sessionAttributes.recordId], "Datatype": dataTypeSpoken}, function(err, record) {if (err) {console.error(err);}});
-        //sessionAttributes.datatypes.push
-        //TODO: Need to get the new RecordID for the new datatype so that we can add it to the session array of datatypes.
 
-        const speakOutput = "OK.  I've added the ability for you to track " + dataTypeSpoken + ". You can now start tracking your data. What would you like to do now?";
+        var dataTypeRecord = await new Promise(async (resolve, reject) => {
+            await airtable("UserDatatype").create({"User": [sessionAttributes.recordId], "Datatype": dataTypeSpoken}, function(err, record) {console.log("NEW DATA TYPE RECORD = " + JSON.stringify(record));if (err) {console.error(err);}resolve(record.fields);});
+        });
+        console.log("SESSION ATTRIBUTES = " + JSON.stringify(sessionAttributes));
+        console.log("SESSION ATTRIBUTES (DATATYPES) = " + JSON.stringify(sessionAttributes.datatypes));
+        console.log("SESSION ATTRIBUTES (RECORDS) = " + JSON.stringify(sessionAttributes.datatypes.records));
+        addDatatypeToSessionAttributes(sessionAttributes.datatypes, dataTypeRecord);
+        //dataTypeArray.push(({id: dataTypeRecord.RecordId ,name: {value: dataTypeRecord.Datatype}}));
+        console.log("DATA TYPES = " + JSON.stringify(sessionAttributes.datatypes));
+        const speakOutput = "OK.  I've added the ability for you to track " + dataTypeSpoken + ". What kind of units do you use to measure " + dataTypeSpoken + "?";
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
@@ -66,6 +74,19 @@ const DataTypeIntentHandler = {
             .getResponse();
     }
 };
+
+function addDatatypeToSessionAttributes(datatypes, data)
+{
+    if (datatypes.records.length > 0) {
+        var entities = [];
+        for (i=0;i<datatypes.records.length;i++) {
+            entities.push({id: datatypes.records[i].fields.RecordId ,name: {value: datatypes.records[i].fields.Datatype}})
+        }
+        entities.push(data);
+        return entities;
+    }
+    else return [];
+}
 
 const HelpIntentHandler = {
     canHandle(handlerInput) {
@@ -141,7 +162,7 @@ const IntentReflectorHandler = {
     },
     handle(handlerInput) {
         const intentName = Alexa.getIntentName(handlerInput.requestEnvelope);
-        const speakOutput = "Intent reflextor message, Jeff. " + intentName;
+        const speakOutput = "Intent reflector message, Jeff. " + intentName;
 
         return handlerInput.responseBuilder
             .speak(speakOutput)

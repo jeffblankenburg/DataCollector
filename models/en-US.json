@@ -54,6 +54,23 @@
                     ]
                 },
                 {
+                    "name": "UnitsIntent",
+                    "slots": [
+                        {
+                            "name": "units",
+                            "type": "Units"
+                        }
+                    ],
+                    "samples": [
+                        "{units}",
+                        "They are measured in {units}",
+                        "in {units}",
+                        "a {units}",
+                        "the {units}",
+                        "it is {units}"
+                    ]
+                },
+                {
                     "name": "AMAZON.NavigateHomeIntent",
                     "samples": []
                 },
@@ -78,36 +95,54 @@
                     "values": [
                         {
                             "name": {
-                                "value": "calories"
-                            }
-                        },
-                        {
-                            "name": {
-                                "value": "ounces"
-                            }
-                        },
-                        {
-                            "name": {
-                                "value": "pounds"
-                            }
-                        },
-                        {
-                            "name": {
-                                "value": "kilograms",
+                                "value": "calorie",
                                 "synonyms": [
-                                    "kilos",
-                                    "kay gees"
+                                    "calories"
                                 ]
                             }
                         },
                         {
                             "name": {
-                                "value": "miles"
+                                "value": "ounce",
+                                "synonyms": [
+                                    "ounces",
+                                    "oh zee"
+                                ]
                             }
                         },
                         {
                             "name": {
-                                "value": "kilometers"
+                                "value": "pound",
+                                "synonyms": [
+                                    "pounds",
+                                    "elle bees"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "kilogram",
+                                "synonyms": [
+                                    "kilos",
+                                    "kay gees",
+                                    "kilograms"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "mile",
+                                "synonyms": [
+                                    "miles"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "kilometer",
+                                "synonyms": [
+                                    "kilometers"
+                                ]
                             }
                         }
                     ]
